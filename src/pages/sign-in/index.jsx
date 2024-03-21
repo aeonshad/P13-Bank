@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import AuthentificationService from '../../services/authentification-service';
+import { useNavigate } from 'react-router-dom';
 
 function SignIn() {
+    const navigate = useNavigate();
     const [form, setForm] = useState({
         username: { value: '' },
         password: { value: '' },
@@ -8,7 +11,14 @@ function SignIn() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(form);
+        AuthentificationService.login(form.username.value, form.password.value).then((isAuthenticated) => {
+            if (!isAuthenticated) {
+                console.log('Wrong credentials');
+                return;
+            }
+            console.log('Good credentials');
+            navigate('/user');
+        });
     };
 
     return (
