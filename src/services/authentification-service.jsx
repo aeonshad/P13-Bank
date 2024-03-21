@@ -1,3 +1,5 @@
+import store from '../app/store';
+
 class AuthentificationService {
     static login(email, password) {
         return fetch('http://localhost:3001/api/v1/user/login', {
@@ -10,6 +12,7 @@ class AuthentificationService {
             .then((response) => response.json())
             .then((data) => {
                 if (data.body && data.body.token) {
+                    store.dispatch({ type: 'auth/setUserJwt', payload: data.body.token });
                     return true;
                 } else {
                     return false;
