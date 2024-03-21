@@ -8,15 +8,17 @@ function SignIn() {
         username: { value: '' },
         password: { value: '' },
     });
+    const [message, setMessage] = useState('Vous êtes déconnecté.');
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setMessage('👉 Tentative de connexion en cours ...');
         AuthentificationService.login(form.username.value, form.password.value).then((isAuthenticated) => {
             if (!isAuthenticated) {
-                console.log('Wrong credentials');
+                setMessage('🔐 Identifiant ou mot de passe incorrect.');
                 return;
             }
-            console.log('Good credentials');
+            setMessage('✅ Vous êtes maintenant connecté !');
             navigate('/user');
         });
     };
@@ -26,6 +28,7 @@ function SignIn() {
             <section className="sign-in-content">
                 <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Sign In</h1>
+                <div className="form-message">{message}</div>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label>

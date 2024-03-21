@@ -289,3 +289,7 @@ body {
         width: 200px;
     }
 }
+
+.form-message {
+    margin-bottom: 20px;
+}
