@@ -1,25 +1,57 @@
+import { useState } from 'react';
+
 function SignIn() {
+    const [form, setForm] = useState({
+        username: { value: '' },
+        password: { value: '' },
+    });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(form);
+    };
+
     return (
         <main className="main bg-dark">
             <section className="sign-in-content">
                 <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Sign In</h1>
-                <form>
+                <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label>
-                        <input type="text" id="username" />
+                        <input
+                            type="text"
+                            id="username"
+                            value={form.username.value}
+                            onChange={(e) =>
+                                setForm((form) => ({
+                                    ...form,
+                                    username: { value: e.target.value },
+                                }))
+                            }
+                        />
                     </div>
                     <div className="input-wrapper">
                         <label htmlFor="password">Password</label>
-                        <input type="password" id="password" />
+                        <input
+                            type="password"
+                            id="password"
+                            value={form.password.value}
+                            onChange={(e) =>
+                                setForm((form) => ({
+                                    ...form,
+                                    password: { value: e.target.value },
+                                }))
+                            }
+                        />
                     </div>
                     <div className="input-remember">
                         <input type="checkbox" id="remember-me" />
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
-                    <a href="./user.html" class="sign-in-button">
+                    <button type="submit" className="sign-in-button">
                         Sign In
-                    </a>
+                    </button>
                 </form>
             </section>
         </main>
