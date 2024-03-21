@@ -1,3 +1,5 @@
+import Footer from './components/footer';
+import Header from './components/header';
 import Home from './pages/home';
 import SignIn from './pages/sign-in';
 import User from './pages/user';
@@ -7,11 +9,13 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 function App() {
     return (
         <Router>
+            <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/user" element={<User />} />
             </Routes>
+            <Footer />
         </Router>
     );
 }
