@@ -12,7 +12,7 @@ function Logout() {
 
     return (
         <Link className="main-nav-item" to="/" onClick={handleLogout}>
-            <i className="fa-solid fa-user-circle"></i>
+            <i className="fa-solid fa-arrow-right-to-bracket"></i>
             Sign out
         </Link>
     );
