@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Logout from '../logout';
 
 function Header() {
     return (
@@ -16,10 +17,7 @@ function Header() {
                     <i className="fa-solid fa-user-circle"></i>
                     Sign In
                 </Link>
-                <Link to="/" className="main-nav-item">
-                    <i className="fa-solid fa-user-circle"></i>
-                    Sign Out
-                </Link>
+                <Logout />
             </div>
         </nav>
     );
