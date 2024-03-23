@@ -344,3 +344,42 @@ body {
     background-color: #3aa374;
     border-color: #00bc77;
 }
+
+.icons-burger,
+.icons-burger-active {
+    cursor: pointer;
+    display: none;
+}
+
+@media (max-width: 425px) {
+    .icons-burger {
+        display: block;
+        font-size: 28px;
+        font-weight: 700;
+    }
+    .icons-burger-active {
+        display: block;
+        color: #00bc77;
+        font-size: 28px;
+        font-weight: 700;
+    }
+    .main-nav-content {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        top: 100%;
+    }
+    #active {
+        top: 55px;
+        right: 0;
+        z-index: 999;
+        text-align: left;
+        background-color: #ffffff;
+        padding: 1rem;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        font-size: 19px;
+    }
+    .main-nav-item:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+}
