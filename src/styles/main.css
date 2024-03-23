@@ -13,8 +13,14 @@ body {
     min-height: 100vh;
 }
 
+#root {
+    display: flex;
+    flex-direction: column;
+}
+
 .main {
     flex: 1;
+    min-height: 89.2vh;
 }
 
 .bg-dark {
