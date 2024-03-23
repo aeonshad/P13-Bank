@@ -3,6 +3,8 @@ import ProfilService from '../../services/profil-service';
 import { useSelector } from 'react-redux';
 function User() {
     const auth = useSelector((state) => state.auth);
+    const user = useSelector((state) => state.user);
+    console.log(user);
     useEffect(() => {
         if (auth.token) {
             ProfilService.profil(auth.token);
@@ -14,8 +16,7 @@ function User() {
                 <h1>
                     Welcome back
                     <br />
-                    {ProfilService.firstname} {ProfilService.lastname}
-                    {' !'}
+                    {user.firstName} {user.lastName} !
                 </h1>
                 <button class="edit-button">Edit Name</button>
             </div>
