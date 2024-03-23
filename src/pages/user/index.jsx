@@ -18,9 +18,10 @@ function User() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(e);
+        ProfilService.updateProfil(form.firstName.value, form.lastName.value, auth.token);
         setIsForm(false);
     };
+
     return (
         <main className="main bg-dark">
             <div class="header">
