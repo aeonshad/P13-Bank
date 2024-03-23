@@ -1,11 +1,21 @@
+import { useEffect } from 'react';
+import ProfilService from '../../services/profil-service';
+import { useSelector } from 'react-redux';
 function User() {
+    const auth = useSelector((state) => state.auth);
+    useEffect(() => {
+        if (auth.token) {
+            ProfilService.profil(auth.token);
+        }
+    }, [auth.token]);
     return (
         <main className="main bg-dark">
             <div class="header">
                 <h1>
                     Welcome back
                     <br />
-                    Tony Jarvis!
+                    {ProfilService.firstname} {ProfilService.lastname}
+                    {' !'}
                 </h1>
                 <button class="edit-button">Edit Name</button>
             </div>
