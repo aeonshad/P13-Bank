@@ -16,6 +16,13 @@ function User() {
         }
     }, [auth.token]);
 
+    useEffect(() => {
+        setForm({
+            firstName: { value: user.firstName },
+            lastName: { value: user.lastName },
+        });
+    }, [user.firstName, user.lastName]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         ProfilService.updateProfil(form.firstName.value, form.lastName.value, auth.token);
