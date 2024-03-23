@@ -1,24 +1,81 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ProfilService from '../../services/profil-service';
 import { useSelector } from 'react-redux';
 function User() {
     const auth = useSelector((state) => state.auth);
     const user = useSelector((state) => state.user);
-    console.log(user);
+    const [isForm, setIsForm] = useState(false);
+    const [form, setForm] = useState({
+        firstName: { value: '' },
+        lastName: { value: '' },
+    });
+
     useEffect(() => {
         if (auth.token) {
             ProfilService.profil(auth.token);
         }
     }, [auth.token]);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(e);
+        setIsForm(false);
+    };
     return (
         <main className="main bg-dark">
             <div class="header">
                 <h1>
                     Welcome back
                     <br />
-                    {user.firstName} {user.lastName} !
+                    {isForm ? (
+                        <form className="user-form" onSubmit={(e) => handleSubmit(e)}>
+                            <div className="user-form-content">
+                                <label htmlFor="firstName"></label>
+                                <input
+                                    type="text"
+                                    id="firstName"
+                                    value={form.firstName.value}
+                                    onChange={(e) =>
+                                        setForm((form) => ({
+                                            ...form,
+                                            firstName: { value: e.target.value },
+                                        }))
+                                    }
+                                />
+                                <label htmlFor="lastName"></label>
+                                <input
+                                    type="text"
+                                    id="lastName"
+                                    value={form.lastName.value}
+                                    onChange={(e) =>
+                                        setForm((form) => ({
+                                            ...form,
+                                            lastName: { value: e.target.value },
+                                        }))
+                                    }
+                                />
+                            </div>
+
+                            <div className="user-form-content">
+                                <button type="submit" className="user-form-btn">
+                                    Save
+                                </button>
+                                <button type="button" className="user-form-btn" onClick={() => setIsForm(false)}>
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    ) : (
+                        user.firstName + ' ' + user.lastName + ' !'
+                    )}
                 </h1>
-                <button class="edit-button">Edit Name</button>
+                {isForm ? (
+                    ''
+                ) : (
+                    <button className="edit-button" onClick={() => setIsForm(true)}>
+                        Edit Name
+                    </button>
+                )}
             </div>
             <h2 className="sr-only">Accounts</h2>
             <section className="account">
