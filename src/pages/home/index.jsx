@@ -1,3 +1,9 @@
+/**
+ * Composant Home
+ * @description Un composant représentant la page d'accueil de l'application.
+ * Affiche des informations promotionnelles et des fonctionnalités.
+ * @returns {JSX.Element} Le contenu de la page d'accueil.
+ */
 function Home() {
     return (
         <main className="main">

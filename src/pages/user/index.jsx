@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react';
 import ProfilService from '../../services/profil-service';
 import { useSelector } from 'react-redux';
+
+/**
+ * Composant User
+ * @description Un composant représentant la page du profil utilisateur.
+ * Affiche les informations du profil utilisateur et permet la modification du prénom et du nom.
+ * Redirige vers la page de connexion si l'utilisateur n'est pas authentifié.
+ * @returns {JSX.Element} Le contenu de la page de profil utilisateur.
+ */
 function User() {
     const auth = useSelector((state) => state.auth);
     const user = useSelector((state) => state.user);
@@ -10,12 +18,14 @@ function User() {
         lastName: { value: '' },
     });
 
+    // Charge le profil utilisateur lors de l'authentification.
     useEffect(() => {
         if (auth.token) {
             ProfilService.profil(auth.token);
         }
     }, [auth.token]);
 
+    // Met à jour le formulaire lorsque les informations de l'utilisateur changent.
     useEffect(() => {
         setForm({
             firstName: { value: user.firstName },
@@ -23,6 +33,7 @@ function User() {
         });
     }, [user.firstName, user.lastName]);
 
+    // Fonction de soumission du formulaire de mise à jour du profil.
     const handleSubmit = (e) => {
         e.preventDefault();
         ProfilService.updateProfil(form.firstName.value, form.lastName.value, auth.token);
@@ -31,7 +42,7 @@ function User() {
 
     return (
         <main className="main bg-dark">
-            <div class="header">
+            <div className="header">
                 <h1>
                     Welcome back
                     <br />

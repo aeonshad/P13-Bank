@@ -2,6 +2,13 @@ import { useState } from 'react';
 import AuthentificationService from '../../services/authentification-service';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Composant SignIn
+ * @description Un composant représentant la page de connexion de l'utilisateur.
+ * Affiche un formulaire de connexion et gère le processus d'authentification.
+ * Redirige vers la page utilisateur une fois l'authentification réussie.
+ * @returns {JSX.Element} Le contenu de la page de connexion.
+ */
 function SignIn() {
     const navigate = useNavigate();
     const [form, setForm] = useState({
@@ -10,6 +17,7 @@ function SignIn() {
     });
     const [message, setMessage] = useState('Vous êtes déconnecté.');
 
+    // Fonction de soumission du formulaire de connexion.
     const handleSubmit = (e) => {
         e.preventDefault();
         setMessage('👉 Tentative de connexion en cours ...');
