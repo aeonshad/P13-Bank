@@ -47,7 +47,15 @@ const persistConfig = {
 // Création du reducer persistant
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = configureStore({ reducer: persistedReducer });
+const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: ['persist/PERSIST'],
+            },
+        }),
+});
 export const persistor = persistStore(store);
 
 export default store;
