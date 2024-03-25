@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ProfilService from '../../services/profil-service';
 import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 /**
  * Composant User
@@ -32,6 +33,11 @@ function User() {
             lastName: { value: user.lastName },
         });
     }, [user.firstName, user.lastName]);
+
+    // Redirige vers la page de connexion si l'utilisateur n'est pas authentifié.
+    if (!auth.token) {
+        return <Navigate to="/" />;
+    }
 
     // Fonction de soumission du formulaire de mise à jour du profil.
     const handleSubmit = (e) => {

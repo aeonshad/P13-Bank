@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import AuthentificationService from '../../services/authentification-service';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 /**
  * Composant SignIn
@@ -11,11 +12,17 @@ import { useNavigate } from 'react-router-dom';
  */
 function SignIn() {
     const navigate = useNavigate();
+    const auth = useSelector((state) => state.auth);
     const [form, setForm] = useState({
         username: { value: '' },
         password: { value: '' },
     });
     const [message, setMessage] = useState('Vous êtes déconnecté.');
+
+    // Redirige vers la page utilisateur si l'utilisateur est déjà connecté.
+    if (auth.token) {
+        return <Navigate to="/user" />;
+    }
 
     // Fonction de soumission du formulaire de connexion.
     const handleSubmit = (e) => {
